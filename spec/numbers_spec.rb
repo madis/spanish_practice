@@ -1,6 +1,8 @@
-require_relative '../numbers'
+require_relative '../lib/number_helper'
 
-RSpec.describe Numbers do
+RSpec.describe NumberHelper do
+  subject { described_class }
+
   it 'knows 0 - 10' do
     expect(subject.to_words(5)).to eq 'cinco'
     expect(subject.to_words(10)).to eq 'diez'

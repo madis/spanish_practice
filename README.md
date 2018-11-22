@@ -4,10 +4,10 @@ Run `./numbers` and you'll see:
 
 ```
 ❯ ./numbers.rb
-Cómo se dice 19?
-diecinueve
+¿Cómo se dice 37? treinta y siete
 Correcto!
-Cómo se dice 29?
-veintiocho
-Incorrecto! Es veintinueve
+¿Qué numero es catorce? 14
+Correcto!
+¿Qué numero es diecisiete? 26
+Incorrecto! Es 17
 ```

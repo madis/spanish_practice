@@ -1,76 +1,45 @@
 #!/usr/bin/env ruby
+require_relative './lib/number_helper'
 
 class Numbers
-  UP_TO_TEN = {
-    1 => 'uno',
-    2 => 'dos',
-    3 => 'tres',
-    4 => 'cuatro',
-    5 => 'cinco',
-    6 => 'seis',
-    7 => 'siete',
-    8 => 'ocho',
-    9 => 'nueve',
-    10 => 'diez'
-  }
+  class WordToNumber
+    def initialize(number)
+      @number = number
+    end
 
-  TEENS = {
-    11 => 'once',
-    12 => 'doce',
-    13 => 'trece',
-    14 => 'catorce',
-    15 => 'quince',
-    16 => 'dieciséis',
-    17 => 'diecisiete',
-    18 => 'dieciocho',
-    19 => 'diecinueve',
-  }
+    def question
+      "¿Qué numero es #{NumberHelper.to_words(@number)}?"
+    end
 
-  TWENTIES = {
-    20 => 'veinte',
-    21 => 'veintiuno',
-    22 => 'veintidós',
-    23 => 'veintitrés',
-    24 => 'veinticuatro',
-    25 => 'veinticinco',
-    26 => 'veintiseis',
-    27 => 'veintisiete',
-    28 => 'veintiocho',
-    29 => 'veintinueve'
-  }
-
-  TENS = {
-    30 => 'treinta',
-    40 => 'cuarenta',
-    50 => 'cincuenta',
-    60 => 'sesenta',
-    70 => 'setenta',
-    80 => 'ochenta',
-    90 => 'noventa'
-  }
-
-  def to_words(number)
-    if number <= 10
-      UP_TO_TEN[number]
-    elsif number.between?(11, 19)
-      TEENS[number]
-    elsif number.between?(20, 29)
-      TWENTIES[number]
-    elsif number > 30
-      remaining = number % 10
-      tens_part = number - remaining
-      "#{TENS[tens_part]} y #{UP_TO_TEN[remaining]}"
+    def answer
+      @number.to_s
     end
   end
 
+  class NumberToWord
+    def initialize(number)
+      @number = number
+    end
+
+    def question
+      "¿Cómo se dice #{@number}?"
+    end
+
+    def answer
+      NumberHelper.to_words(@number)
+    end
+  end
 
   def self.play
-    wordifier = Numbers.new
+    wordifier = NumberHelper.new
     loop do
       number = rand(100)
-      puts "Cómo se dice #{number}?"
+      game = [NumberToWord, WordToNumber].sample.new(number)
+
+      print game.question + " "
       actual_answer = gets.chomp
-      expected_answer = wordifier.to_words(number)
+      expected_answer = game.answer
+
       if actual_answer == expected_answer
         puts "Correcto!"
       else
