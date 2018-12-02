@@ -41,9 +41,9 @@ class Numbers
       expected_answer = game.answer
 
       if actual_answer == expected_answer
-        puts "Correcto!"
+        puts "¡Correcto!"
       else
-        puts "Incorrecto! Es #{expected_answer}"
+        puts "¡Incorrecto! Es #{expected_answer}"
       end
       `say -v Monica #{expected_answer}`
     end
