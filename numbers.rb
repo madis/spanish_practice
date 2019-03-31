@@ -40,7 +40,7 @@ class Numbers
       actual_answer = gets.chomp
       expected_answer = game.answer
 
-      if actual_answer == expected_answer
+      if actual_answer.downcase == expected_answer.downcase
         puts "¡Correcto!"
       else
         puts "¡Incorrecto! Es #{expected_answer}"
