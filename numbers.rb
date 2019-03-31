@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require_relative './lib/number_helper'
+require_relative './lib/random_in_range_generator'
 
 class Numbers
   class WordToNumber
@@ -8,7 +9,7 @@ class Numbers
     end
 
     def question
-      "¿Qué numero es #{NumberHelper.to_words(@number)}?"
+      "¿Qué numero es: #{NumberHelper.to_words(@number)}?"
     end
 
     def answer
@@ -22,7 +23,7 @@ class Numbers
     end
 
     def question
-      "¿Cómo se dice #{@number}?"
+      "¿Cómo se dice: #{@number}?"
     end
 
     def answer
@@ -32,8 +33,10 @@ class Numbers
 
   def self.play
     wordifier = NumberHelper.new
+    numbers_source = RandomInRangeGenerator.new
+
     loop do
-      number = rand(100)
+      number = numbers_source.next
       game = [NumberToWord, WordToNumber].sample.new(number)
 
       print game.question + " "
@@ -41,8 +44,10 @@ class Numbers
       expected_answer = game.answer
 
       if actual_answer.downcase == expected_answer.downcase
+        `afplay /System/Library/Sounds/Tink.aiff`
         puts "¡Correcto!"
       else
+        `afplay /System/Library/Sounds/Basso.aiff`
         puts "¡Incorrecto! Es #{expected_answer}"
       end
       `say -v Monica #{expected_answer}`
