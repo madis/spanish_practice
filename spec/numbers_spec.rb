@@ -3,20 +3,32 @@ require_relative '../lib/number_helper'
 RSpec.describe NumberHelper do
   subject { described_class }
 
-  it 'knows 0 - 10' do
-    expect(subject.to_words(5)).to eq 'cinco'
-    expect(subject.to_words(10)).to eq 'diez'
-  end
+  TEST_DATA = {
+    5 => 'cinco',
+    10 => 'diez',
+    18 => 'dieciocho',
+    22 => 'veintidós',
+    44 => 'cuarenta y cuatro',
+    100 => 'cien',
+    101 => 'ciento uno',
+    129 => 'ciento veintinueve',
+    195 => 'ciento noventa y cinco',
+    201 => 'doscientos uno',
+    202 => 'doscientos dos',
+    220 => 'doscientos veinte',
+    221 => 'doscientos veintiuno',
+    225 => 'doscientos veinticinco',
+    238 => 'doscientos treinta y ocho',
+    1_000 => 'mil',
+    1_001 => 'mil uno',
+    1_500 => 'mil quinientos',
+    1_686 => 'mil seiscientos ochenta y seis',
+    2_001 => 'dos mil uno'
 
-  it 'knows 11 - 19' do
-    expect(subject.to_words(18)).to eq 'dieciocho'
-  end
-
-  it 'knows 20 - 29' do
-    expect(subject.to_words(22)).to eq 'veintidós'
-  end
-
-  it 'knows 30+' do
-    expect(subject.to_words(44)).to eq 'cuarenta y cuatro'
+  }
+  TEST_DATA.each do |number, expected|
+    it "#{number} translates to #{expected}" do
+      expect(subject.to_words(number)).to eq expected
+    end
   end
 end
